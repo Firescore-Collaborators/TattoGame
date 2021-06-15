@@ -11,11 +11,6 @@ public class LineDraw : MonoBehaviour
 
     public List<Vector3> fingerPositions;
 
-    void Start()
-    {
-        
-    }
-
 
     void Update()
     {
@@ -26,7 +21,7 @@ public class LineDraw : MonoBehaviour
 
         if(Input.GetMouseButton(1))
         {
-            Vector3 tempfingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 0.31f));
+            Vector3 tempfingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 1.45f));
             UpdateLine(tempfingerPos);
             
         }
@@ -35,10 +30,12 @@ public class LineDraw : MonoBehaviour
     void CreateLine()
     {
         currentLine = Instantiate(LinePrefab, Vector3.zero, Quaternion.identity);
+
         lineRenderer = currentLine.GetComponent<LineRenderer>();
+
         fingerPositions.Clear();
-        fingerPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f,0f,0.31f)));
-        fingerPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 0.31f)));
+        fingerPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f,0f,1.45f)));
+        fingerPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f,1.45f)));
         lineRenderer.SetPosition(0 , fingerPositions[0]);
         lineRenderer.SetPosition(1 , fingerPositions[1]);
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
@@ -12,12 +13,19 @@ public class Controller : MonoBehaviour
     public GameObject TattoColor;
     public GameObject CameraLastPos;
     public GameObject Tatto;
-    public GameObject Line;
+    public Material materialLine;
     public GameObject Fill;
+    public GameObject Line;
+    public GameObject FillPrefab;
+    public GameObject TattoMachine;
 
-
+    public static Color selectedColor = Color.black;
+    public static string mode ;
+    float zdistance;
     void Start()
     {
+        mode = "fill";
+        zdistance = 1.45f;
         StartCoroutine(LookatPos());   
     }
     
@@ -32,26 +40,49 @@ public class Controller : MonoBehaviour
         // ObjectTatoo.SetActive(true);
         yield return new WaitForSeconds(0.4f);
         Tatto.SetActive(true);
+        TattoMachine.SetActive(true);
     }
 
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !IsPointerOverUIObject())
         {
-            TattoColor.SetActive(true);
+            CreateFill();
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !IsPointerOverUIObject())
         {
-            TattoColor.SetActive(true); 
-            TattoColor.transform.localScale = TattoColor.transform.localScale *1.1f;
+           
+            Fill.transform.localScale = Fill.transform.localScale * 1.05f;
         }
+
+        TattoMachine.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1.4f));
+
     }
 
     public void ChangeColor(Image spriteColor)
     {
-        Line.GetComponent<LineRenderer>().sharedMaterial.color = spriteColor.color;
-        Fill.GetComponent<SpriteRenderer>().color = spriteColor.color;
+        // Line.GetComponent<LineRenderer>().sharedMaterial.SetColor("_Color",spriteColor.color);
+        selectedColor = spriteColor.color;
+    }
+
+
+    void CreateFill()
+    {
+        Fill = Instantiate(FillPrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, zdistance)), Quaternion.identity);
+        Fill.GetComponent<SpriteRenderer>().color = selectedColor;
+        zdistance -= 0.01f;
+    }
+
+
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }
