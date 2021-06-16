@@ -18,6 +18,7 @@ public class Controller : MonoBehaviour
     public GameObject Line;
     public GameObject FillPrefab;
     public GameObject TattoMachine;
+    public GameObject Trimmer;
     public GameObject MainUi;
 
     public static Color selectedColor = Color.black;
@@ -63,6 +64,7 @@ public class Controller : MonoBehaviour
         }
 
         TattoMachine.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1.4f));
+        Trimmer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 1.4f));
     }
 
     public void ChangeColor(Image spriteColor)
