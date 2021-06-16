@@ -14,16 +14,18 @@ public class LineDraw : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(1))
+        if( Controller.mode == "sline" || Controller.mode == "bline")
         {
-           CreateLine();
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                CreateLine();
+            }
 
-        if(Input.GetMouseButton(1))
-        {
-            Vector3 tempfingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 1.45f));
-            UpdateLine(tempfingerPos);
-            
+            if (Input.GetMouseButton(0))
+            {
+                Vector3 tempfingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 1.45f));
+                UpdateLine(tempfingerPos);
+            }
         }
     }
 
@@ -32,6 +34,19 @@ public class LineDraw : MonoBehaviour
         currentLine = Instantiate(LinePrefab, Vector3.zero, Quaternion.identity);
 
         lineRenderer = currentLine.GetComponent<LineRenderer>();
+        lineRenderer.startColor = Controller.selectedColor;
+        lineRenderer.endColor = Controller.selectedColor;
+        if(Controller.mode == "sline")
+        {
+            lineRenderer.startWidth = 0.01f;
+            lineRenderer.endWidth = 0.01f;
+        }
+
+        if(Controller.mode == "bline")
+        {
+            lineRenderer.startWidth = 0.03f;
+            lineRenderer.endWidth = 0.03f;
+        }
 
         fingerPositions.Clear();
         fingerPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f,0f,1.45f)));
@@ -47,5 +62,17 @@ public class LineDraw : MonoBehaviour
         lineRenderer.positionCount++;
         lineRenderer.SetPosition(lineRenderer.positionCount - 1, newFingerPos);
     }
+
+
+    public void thinLine()
+    {
+        Controller.mode = "sline";
+        
+    }
+    public void thickLine()
+    {
+        Controller.mode = "bline";
+    }
+
 
 }

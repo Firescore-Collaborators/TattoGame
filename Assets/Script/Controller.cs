@@ -18,9 +18,10 @@ public class Controller : MonoBehaviour
     public GameObject Line;
     public GameObject FillPrefab;
     public GameObject TattoMachine;
+    public GameObject MainUi;
 
     public static Color selectedColor = Color.black;
-    public static string mode ;
+    public static string mode;
     float zdistance;
     void Start()
     {
@@ -41,29 +42,32 @@ public class Controller : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         Tatto.SetActive(true);
         TattoMachine.SetActive(true);
+        MainUi.SetActive(true);
     }
 
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !IsPointerOverUIObject())
+        if(mode == "fill")
         {
-            CreateFill();
-        }
+            if (Input.GetMouseButtonDown(0) && !IsPointerOverUIObject())
+            {
+                CreateFill();
+            }
 
-        if (Input.GetMouseButton(0) && !IsPointerOverUIObject())
-        {
-           
-            Fill.transform.localScale = Fill.transform.localScale * 1.05f;
+            if (Input.GetMouseButton(0) && !IsPointerOverUIObject())
+            {
+
+                Fill.transform.localScale = Fill.transform.localScale * 1.05f;
+            }
         }
 
         TattoMachine.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1.4f));
-
     }
 
     public void ChangeColor(Image spriteColor)
     {
-        // Line.GetComponent<LineRenderer>().sharedMaterial.SetColor("_Color",spriteColor.color);
+
         selectedColor = spriteColor.color;
     }
 
@@ -85,4 +89,11 @@ public class Controller : MonoBehaviour
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
     }
+
+    public void FillMode()
+    {
+        mode = "fill";
+
+    }
+
 }
