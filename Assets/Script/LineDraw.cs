@@ -23,8 +23,12 @@ public class LineDraw : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                Vector3 tempfingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 1.45f));
+                Vector3 tempfingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, Controller.zdistance));
                 UpdateLine(tempfingerPos);
+            }
+            if(Input.GetMouseButtonUp(0))
+            {
+                Controller.zdistance -= 0.005f;
             }
         }
     }
@@ -49,8 +53,8 @@ public class LineDraw : MonoBehaviour
         }
 
         fingerPositions.Clear();
-        fingerPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f,0f,1.45f)));
-        fingerPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f,1.45f)));
+        fingerPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f,0f, Controller.zdistance)));
+        fingerPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, Controller.zdistance)));
         lineRenderer.SetPosition(0 , fingerPositions[0]);
         lineRenderer.SetPosition(1 , fingerPositions[1]);
 

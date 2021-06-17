@@ -23,7 +23,9 @@ public class Controller : MonoBehaviour
 
     public static Color selectedColor = Color.black;
     public static string mode;
-    float zdistance;
+    public static float zdistance;
+    public static int trimCount = 0;
+    public bool trim;
     void Start()
     {
         mode = "fill";
@@ -39,11 +41,11 @@ public class Controller : MonoBehaviour
         LeanTween.move(camera,CameraLastPos.transform.position, 0.5f);
         yield return new WaitForSeconds(0.4f);
         Character.SetActive(false);
-        // ObjectTatoo.SetActive(true);
-        yield return new WaitForSeconds(0.4f);
+        
+      //  yield return new WaitForSeconds(0.2f);
         Tatto.SetActive(true);
-        TattoMachine.SetActive(true);
-        MainUi.SetActive(true);
+        
+        Trimmer.SetActive(true);
     }
 
 
@@ -63,8 +65,25 @@ public class Controller : MonoBehaviour
             }
         }
 
-        TattoMachine.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1.4f));
-        Trimmer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, 1.4f));
+        TattoMachine.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1f));
+        Trimmer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, -200f, 1.4f));
+
+        if(trimCount == 12)
+        {
+            StartCoroutine(TattoSTart());
+            trimCount++;
+        }
+    }
+
+
+    IEnumerator TattoSTart()
+    {
+        yield return new WaitForSeconds(2f);
+        TattoMachine.SetActive(true);
+        MainUi.SetActive(true);
+        ObjectTatoo.SetActive(true);
+       
+        Trimmer.SetActive(false);
     }
 
     public void ChangeColor(Image spriteColor)
@@ -78,7 +97,7 @@ public class Controller : MonoBehaviour
     {
         Fill = Instantiate(FillPrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, zdistance)), Quaternion.identity);
         Fill.GetComponent<SpriteRenderer>().color = selectedColor;
-        zdistance -= 0.01f;
+        zdistance -= 0.005f;
     }
 
 
