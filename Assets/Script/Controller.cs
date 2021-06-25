@@ -68,7 +68,7 @@ public class Controller : MonoBehaviour
         TattoMachine.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1f));
         Trimmer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, -200f, 1.4f));
 
-        if(trimCount == 12)
+        if(trimCount == 25)
         {
             StartCoroutine(TattoSTart());
             trimCount++;
