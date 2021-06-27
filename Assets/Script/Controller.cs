@@ -19,7 +19,9 @@ public class Controller : MonoBehaviour
     public GameObject FillPrefab;
     public GameObject TattoMachine;
     public GameObject Trimmer;
+    public GameObject sprayBottle;
     public GameObject MainUi;
+    public ParticleSystem waterSpray;
 
     public static Color selectedColor = Color.black;
     public static string mode;
@@ -65,14 +67,33 @@ public class Controller : MonoBehaviour
             }
         }
 
+        if (mode == "spray")
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                waterSpray.Play();
+            }
+        }
+
+
+
         TattoMachine.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1f));
+        sprayBottle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, -300f, 1f));
         Trimmer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, -200f, 1.4f));
 
         if(trimCount == 25)
         {
-            StartCoroutine(TattoSTart());
+            StartCoroutine(SpraySTart());
             trimCount++;
         }
+    }
+
+    IEnumerator SpraySTart()
+    {
+        yield return new WaitForSeconds(2f);
+        sprayBottle.SetActive(true);
+        mode = "spray";
+        Trimmer.SetActive(false);
     }
 
 
@@ -82,7 +103,6 @@ public class Controller : MonoBehaviour
         TattoMachine.SetActive(true);
         MainUi.SetActive(true);
         ObjectTatoo.SetActive(true);
-       
         Trimmer.SetActive(false);
     }
 
