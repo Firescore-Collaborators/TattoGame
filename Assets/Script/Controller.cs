@@ -20,7 +20,9 @@ public class Controller : MonoBehaviour
     public GameObject TattoMachine;
     public GameObject Trimmer;
     public GameObject sprayBottle;
+    public GameObject Cloth;
     public GameObject MainUi;
+    public GameObject Water;
     public ParticleSystem waterSpray;
 
     public static Color selectedColor = Color.black;
@@ -78,6 +80,7 @@ public class Controller : MonoBehaviour
 
 
         TattoMachine.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1f));
+        Cloth.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1f));
         sprayBottle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, -300f, 1f));
         Trimmer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, -200f, 1.4f));
 
@@ -94,6 +97,15 @@ public class Controller : MonoBehaviour
         sprayBottle.SetActive(true);
         mode = "spray";
         Trimmer.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        Water.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        Cloth.SetActive(true);
+        sprayBottle.SetActive(false);
+        yield return new WaitForSeconds(4f);
+        Cloth.SetActive(false);
+        Water.SetActive(false);
+        StartCoroutine(TattoSTart());
     }
 
 
