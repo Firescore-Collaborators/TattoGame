@@ -103,8 +103,9 @@ public class Controller : MonoBehaviour
         Cloth.SetActive(true);
         sprayBottle.SetActive(false);
         yield return new WaitForSeconds(4f);
-        Cloth.SetActive(false);
         Water.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        Cloth.SetActive(false);
         StartCoroutine(TattoSTart());
     }
 
