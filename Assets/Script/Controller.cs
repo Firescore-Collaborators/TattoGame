@@ -24,6 +24,7 @@ public class Controller : MonoBehaviour
     public GameObject MainUi;
     public GameObject Water;
     public ParticleSystem waterSpray;
+    public ParticleSystem HairParticle;
 
     public static Color selectedColor = Color.black;
     public static string mode;
@@ -32,7 +33,7 @@ public class Controller : MonoBehaviour
     public bool trim;
     void Start()
     {
-        mode = "fill";
+        mode = "trim";
         zdistance = 1.45f;
         StartCoroutine(LookatPos());   
     }
@@ -74,6 +75,19 @@ public class Controller : MonoBehaviour
             if(Input.GetMouseButtonDown(0))
             {
                 waterSpray.Play();
+            }
+        }
+
+        if (mode == "trim")
+        {
+            if(Input.GetMouseButton(0))
+            {
+                HairParticle.gameObject.SetActive(true);
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                HairParticle.gameObject.SetActive(false);
             }
         }
 
