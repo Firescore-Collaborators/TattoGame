@@ -9,8 +9,7 @@ public class Trimmer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("trim"))
         {
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            gameObject.SetActive(false);
            Controller.trimCount++;
             print(Controller.trimCount);
         }
