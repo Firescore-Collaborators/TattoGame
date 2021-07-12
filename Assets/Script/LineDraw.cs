@@ -10,6 +10,8 @@ public class LineDraw : MonoBehaviour
     public LineRenderer lineRenderer;
 
     public List<Vector3> fingerPositions;
+    
+    public List<GameObject> lineColor;
 
 
     void Update()
@@ -38,6 +40,7 @@ public class LineDraw : MonoBehaviour
         currentLine = Instantiate(LinePrefab, Vector3.zero, Quaternion.identity);
 
         lineRenderer = currentLine.GetComponent<LineRenderer>();
+        lineRenderer.sortingOrder = 4;
         lineRenderer.startColor = Controller.selectedColor;
         lineRenderer.endColor = Controller.selectedColor;
         if(Controller.mode == "sline")
@@ -71,12 +74,19 @@ public class LineDraw : MonoBehaviour
     public void thinLine()
     {
         Controller.mode = "sline";
-        
     }
     public void thickLine()
     {
         Controller.mode = "bline";
     }
 
-
+    public void Resetline()
+    {
+        foreach(GameObject go in lineColor)
+        {
+            Destroy(go);
+        }
+        lineColor.Clear();
+        Controller.zdistance = 0;
+    }
 }

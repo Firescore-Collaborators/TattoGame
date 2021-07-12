@@ -32,8 +32,11 @@ public class Controller : MonoBehaviour
     public static int trimCount = 0;
     public static int sortLayerCount = 0;
     public bool trim;
+
+    public List<GameObject> ColorList;
     void Start()
     {
+
         mode = "trim";
         zdistance = 1.45f;
         StartCoroutine(LookatPos());   
@@ -146,6 +149,7 @@ public class Controller : MonoBehaviour
         Fill = Instantiate(FillPrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, zdistance)), Quaternion.identity);
         Fill.GetComponent<SpriteRenderer>().color = selectedColor;
         Fill.GetComponent<SpriteRenderer>().sortingOrder = sortLayerCount;
+        ColorList.Add(Fill);
         sortLayerCount++;
         zdistance -= 0.005f;
     }
@@ -167,4 +171,15 @@ public class Controller : MonoBehaviour
 
     }
 
+    public void ResetColor()
+    {
+        foreach (GameObject go in ColorList)
+        {
+            Destroy(go);
+        }
+
+        ColorList.Clear();
+
+        sortLayerCount = 0;
+    }
 }
