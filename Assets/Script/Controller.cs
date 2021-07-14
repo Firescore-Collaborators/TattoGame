@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -26,6 +27,7 @@ public class Controller : MonoBehaviour
     public GameObject ButtonNext;
     public ParticleSystem waterSpray;
     public ParticleSystem HairParticle;
+    public Animator TextAnim;
 
     public static Color selectedColor = Color.black;
     public static string mode;
@@ -118,7 +120,7 @@ public class Controller : MonoBehaviour
         {
             StartCoroutine(SpraySTart());
             trimCount++;
-           
+            TextAnim.SetTrigger("text");
         }
     }
 
@@ -128,7 +130,7 @@ public class Controller : MonoBehaviour
         sprayBottle.SetActive(true);
         mode = "spray";
         Trimmer.SetActive(false);
-        ButtonNext.SetActive(true);
+        ButtonNext.SetActive(true); 
     }
 
     IEnumerator TattoSTart()
@@ -161,6 +163,13 @@ public class Controller : MonoBehaviour
             {
                 Cloth.SetActive(false);
                 StartCoroutine(TattoSTart());
+            }
+           else
+            {
+                if(mode == "finish")
+                {
+                    SceneManager.LoadScene(0);
+                }
             }
         }
 
@@ -220,6 +229,7 @@ public class Controller : MonoBehaviour
         Character.SetActive(true);
         Character.GetComponent<Animator>().Play("FistPump");
         LeanTween.move(camera, camPos, 0.3f);
+        mode = "finish";
         foreach (ParticleSystem ps in confetti)
         {
             ps.Play();
