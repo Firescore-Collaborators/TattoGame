@@ -34,9 +34,13 @@ public class Controller : MonoBehaviour
     public bool trim;
 
     public List<GameObject> ColorList;
+    Vector3 camPos;
+
+    public ParticleSystem[] confetti;
+
     void Start()
     {
-
+        camPos = camera.transform.position;
         mode = "trim";
         zdistance = 1.45f;
         StartCoroutine(LookatPos());   
@@ -50,10 +54,7 @@ public class Controller : MonoBehaviour
         LeanTween.move(camera,CameraLastPos.transform.position, 0.5f);
         yield return new WaitForSeconds(0.4f);
         Character.SetActive(false);
-        
-      //  yield return new WaitForSeconds(0.2f);
         Tatto.SetActive(true);
-        
         Trimmer.SetActive(true);
     }
 
@@ -79,6 +80,7 @@ public class Controller : MonoBehaviour
             if(Input.GetMouseButtonDown(0))
             {
                 waterSpray.Play();
+                Water.SetActive(true);
             }
         }
 
@@ -137,9 +139,13 @@ public class Controller : MonoBehaviour
         Trimmer.SetActive(false);
     }
 
-    public void ChangeColor(Image spriteColor)
+    public void StartWiping()
     {
 
+    }
+
+    public void ChangeColor(Image spriteColor)
+    {
         selectedColor = spriteColor.color;
     }
 
@@ -181,5 +187,19 @@ public class Controller : MonoBehaviour
         ColorList.Clear();
 
         sortLayerCount = 0;
+    }
+
+    public void ResetCamera()
+    {
+        MainUi.SetActive(false);
+        Tatto.SetActive(false);
+        TattoMachine.SetActive(false);
+        Character.SetActive(true);
+        Character.GetComponent<Animator>().Play("FistPump");
+        LeanTween.move(camera, camPos, 0.3f);
+        foreach(ParticleSystem ps in confetti)
+        {
+            ps.Play();
+        }
     }
 }

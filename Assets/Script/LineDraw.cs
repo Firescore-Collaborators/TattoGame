@@ -38,7 +38,7 @@ public class LineDraw : MonoBehaviour
     void CreateLine()
     {
         currentLine = Instantiate(LinePrefab, Vector3.zero, Quaternion.identity);
-
+        lineColor.Add(currentLine);
         lineRenderer = currentLine.GetComponent<LineRenderer>();
         lineRenderer.sortingOrder = 4;
         lineRenderer.startColor = Controller.selectedColor;
@@ -87,6 +87,6 @@ public class LineDraw : MonoBehaviour
             Destroy(go);
         }
         lineColor.Clear();
-        Controller.zdistance = 0;
+        Controller.zdistance = 1.45f; 
     }
 }

@@ -11,7 +11,6 @@ public class Trimmer : MonoBehaviour
         {
             gameObject.SetActive(false);
            Controller.trimCount++;
-            print(Controller.trimCount);
         }
     }
 }
