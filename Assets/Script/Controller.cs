@@ -23,6 +23,7 @@ public class Controller : MonoBehaviour
     public GameObject Cloth;
     public GameObject MainUi;
     public GameObject Water;
+    public GameObject ButtonNext;
     public ParticleSystem waterSpray;
     public ParticleSystem HairParticle;
 
@@ -31,7 +32,7 @@ public class Controller : MonoBehaviour
     public static float zdistance;
     public static int trimCount = 0;
     public static int sortLayerCount = 0;
-    public bool trim;
+
 
     public List<GameObject> ColorList;
     Vector3 camPos;
@@ -43,15 +44,15 @@ public class Controller : MonoBehaviour
         camPos = camera.transform.position;
         mode = "trim";
         zdistance = 1.45f;
-        StartCoroutine(LookatPos());   
+        StartCoroutine(LookatPos());
     }
-    
+
     IEnumerator LookatPos()
     {
         yield return new WaitForSeconds(0.5f);
         LeanTween.rotate(Character, new Vector3(0, 180f, 0), 0.5f);
         yield return new WaitForSeconds(3f);
-        LeanTween.move(camera,CameraLastPos.transform.position, 0.5f);
+        LeanTween.move(camera, CameraLastPos.transform.position, 0.5f);
         yield return new WaitForSeconds(0.4f);
         Character.SetActive(false);
         Tatto.SetActive(true);
@@ -61,7 +62,7 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
-        if(mode == "fill")
+        if (mode == "fill")
         {
             if (Input.GetMouseButtonDown(0) && !IsPointerOverUIObject())
             {
@@ -77,16 +78,25 @@ public class Controller : MonoBehaviour
 
         if (mode == "spray")
         {
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 waterSpray.Play();
                 Water.SetActive(true);
             }
         }
 
+        if (mode == "wipe")
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(WipeDone());
+            }
+        }
+
+
         if (mode == "trim")
         {
-            if(Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0))
             {
                 HairParticle.gameObject.SetActive(true);
             }
@@ -104,10 +114,11 @@ public class Controller : MonoBehaviour
         sprayBottle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, -300f, 1f));
         Trimmer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, -200f, 1.4f));
 
-        if(trimCount == 25)
+        if (trimCount == 25)
         {
             StartCoroutine(SpraySTart());
             trimCount++;
+           
         }
     }
 
@@ -117,18 +128,8 @@ public class Controller : MonoBehaviour
         sprayBottle.SetActive(true);
         mode = "spray";
         Trimmer.SetActive(false);
-        yield return new WaitForSeconds(1f);
-        Water.SetActive(true);
-        yield return new WaitForSeconds(5f);
-        Cloth.SetActive(true);
-        sprayBottle.SetActive(false);
-        yield return new WaitForSeconds(4f);
-        Water.SetActive(false);
-        yield return new WaitForSeconds(2f);
-        Cloth.SetActive(false);
-        StartCoroutine(TattoSTart());
+        ButtonNext.SetActive(true);
     }
-
 
     IEnumerator TattoSTart()
     {
@@ -139,8 +140,30 @@ public class Controller : MonoBehaviour
         Trimmer.SetActive(false);
     }
 
-    public void StartWiping()
+    IEnumerator WipeDone()
     {
+        yield return new WaitForSeconds(3f);
+        Water.SetActive(false);
+    }
+
+
+    public void NextButton()
+    {
+        if (mode == "spray")
+        {
+            Cloth.SetActive(true);
+            sprayBottle.SetActive(false);
+            mode = "wipe";
+        }
+        else
+        {
+            if (mode == "wipe")
+            {
+                Cloth.SetActive(false);
+                StartCoroutine(TattoSTart());
+            }
+        }
+
 
     }
 
@@ -197,9 +220,11 @@ public class Controller : MonoBehaviour
         Character.SetActive(true);
         Character.GetComponent<Animator>().Play("FistPump");
         LeanTween.move(camera, camPos, 0.3f);
-        foreach(ParticleSystem ps in confetti)
+        foreach (ParticleSystem ps in confetti)
         {
             ps.Play();
         }
     }
+
+
 }
