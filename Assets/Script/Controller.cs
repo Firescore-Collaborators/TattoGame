@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class Controller : MonoBehaviour
 {
@@ -35,7 +36,10 @@ public class Controller : MonoBehaviour
     public static int trimCount = 0;
     public static int sortLayerCount = 0;
 
-
+    public TextMeshProUGUI textInfo; 
+    public GameObject textBackground; 
+    public GameObject previewImage; 
+    public GameObject Tattopreview; 
     public List<GameObject> ColorList;
     Vector3 camPos;
 
@@ -54,11 +58,15 @@ public class Controller : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         LeanTween.rotate(Character, new Vector3(0, 180f, 0), 0.5f);
         yield return new WaitForSeconds(3f);
+        previewImage.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        previewImage.SetActive(false);
         LeanTween.move(camera, CameraLastPos.transform.position, 0.5f);
         yield return new WaitForSeconds(0.4f);
         Character.SetActive(false);
         Tatto.SetActive(true);
         Trimmer.SetActive(true);
+        textBackground.SetActive(true);
     }
 
 
@@ -80,6 +88,7 @@ public class Controller : MonoBehaviour
 
         if (mode == "spray")
         {
+            textInfo.text = "Apply Disinfectant Spray";
             if (Input.GetMouseButtonDown(0))
             {
                 waterSpray.Play();
@@ -89,15 +98,18 @@ public class Controller : MonoBehaviour
 
         if (mode == "wipe")
         {
+            textInfo.text = "Wipe the skin";
             if (Input.GetMouseButtonDown(0))
             {
                 StartCoroutine(WipeDone());
+                mode = "tattoo";
             }
         }
 
 
         if (mode == "trim")
         {
+           
             if (Input.GetMouseButton(0))
             {
                 HairParticle.gameObject.SetActive(true);
@@ -130,22 +142,26 @@ public class Controller : MonoBehaviour
         sprayBottle.SetActive(true);
         mode = "spray";
         Trimmer.SetActive(false);
-        ButtonNext.SetActive(true); 
+        ButtonNext.SetActive(true);
     }
 
     IEnumerator TattoSTart()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        Tattopreview.SetActive(true); 
         TattoMachine.SetActive(true);
         MainUi.SetActive(true);
         ObjectTatoo.SetActive(true);
         Trimmer.SetActive(false);
+        textInfo.text = "Draw The Tattoo";
     }
 
     IEnumerator WipeDone()
     {
         yield return new WaitForSeconds(3f);
         Water.SetActive(false);
+        TextAnim.SetTrigger("text");
+        
     }
 
 
@@ -159,10 +175,11 @@ public class Controller : MonoBehaviour
         }
         else
         {
-            if (mode == "wipe")
+            if (mode == "tattoo")
             {
                 Cloth.SetActive(false);
                 StartCoroutine(TattoSTart());
+       
             }
            else
             {
@@ -226,6 +243,8 @@ public class Controller : MonoBehaviour
         MainUi.SetActive(false);
         Tatto.SetActive(false);
         TattoMachine.SetActive(false);
+        textBackground.SetActive(false);
+        Tattopreview.SetActive(false);
         Character.SetActive(true);
         Character.GetComponent<Animator>().Play("FistPump");
         LeanTween.move(camera, camPos, 0.3f);
