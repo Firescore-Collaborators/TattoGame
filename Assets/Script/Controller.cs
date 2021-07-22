@@ -133,6 +133,7 @@ public class Controller : MonoBehaviour
             StartCoroutine(SpraySTart());
             trimCount++;
             TextAnim.SetTrigger("text");
+            
         }
     }
 
@@ -142,6 +143,7 @@ public class Controller : MonoBehaviour
         sprayBottle.SetActive(true);
         mode = "spray";
         Trimmer.SetActive(false);
+        yield return new WaitForSeconds(4f);
         ButtonNext.SetActive(true);
     }
 
@@ -161,7 +163,7 @@ public class Controller : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Water.SetActive(false);
         TextAnim.SetTrigger("text");
-        
+        ButtonNext.SetActive(true);
     }
 
 
@@ -190,6 +192,7 @@ public class Controller : MonoBehaviour
             }
         }
 
+        ButtonNext.SetActive(false);
 
     }
 
@@ -253,6 +256,7 @@ public class Controller : MonoBehaviour
         {
             ps.Play();
         }
+        ButtonNext.SetActive(true);
     }
 
 
