@@ -34,7 +34,7 @@ public class Controller : MonoBehaviour
     public static string mode;
     public static float zdistance;
     public static int trimCount = 0;
-    public static int sortLayerCount = 0;
+    public static int sortLayerCount = 4;
 
     public TextMeshProUGUI textInfo; 
     public GameObject textBackground; 
@@ -206,9 +206,12 @@ public class Controller : MonoBehaviour
     {
         Fill = Instantiate(FillPrefab, Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, 0f, zdistance)), Quaternion.identity);
         Fill.GetComponent<SpriteRenderer>().color = selectedColor;
-        Fill.GetComponent<SpriteRenderer>().sortingOrder = sortLayerCount;
+        if(sortLayerCount !=4)
+        {
+            Fill.GetComponent<SpriteRenderer>().sortingOrder = sortLayerCount;
+        }
         ColorList.Add(Fill);
-        sortLayerCount++;
+        sortLayerCount--;
         zdistance -= 0.005f;
     }
 
