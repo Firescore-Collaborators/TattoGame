@@ -405,7 +405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &23819870
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1460,8 +1460,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.0000076294, y: -198}
-  m_SizeDelta: {x: 123.47604, y: 123.47601}
+  m_AnchoredPosition: {x: -0.000011444, y: -206.1}
+  m_SizeDelta: {x: 153.19589, y: 153.19583}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &258610913
 MonoBehaviour:
@@ -5351,8 +5351,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000015258789, y: 0.0000038146973}
-  m_SizeDelta: {x: -32.30867, y: -29.74099}
+  m_AnchoredPosition: {x: -1.199997, y: 0.000022888184}
+  m_SizeDelta: {x: -11.772446, y: -8.768585}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &881273314
 MonoBehaviour:
@@ -6046,7 +6046,6 @@ Transform:
   - {fileID: 1481422782}
   - {fileID: 680823752}
   - {fileID: 2026633843}
-  - {fileID: 1984189872}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9283,7 +9282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621730602}
   m_LocalRotation: {x: 0.3614799, y: -0.06524868, z: 0.122752205, w: 0.92195815}
-  m_LocalPosition: {x: 0.04, y: 4.61, z: -0.19}
+  m_LocalPosition: {x: 0.07, y: 4.24, z: -0.46}
   m_LocalScale: {x: 0.06072, y: 0.06072, z: 0.06072}
   m_Children: []
   m_Father: {fileID: 2010703023}
@@ -9981,14 +9980,14 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 25
+    angle: 5.7572064
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 1}
+    m_Position: {x: 0.000019606916, y: 0.000040359868, z: -0.000026605512}
+    m_Rotation: {x: 317.66977, y: 17.564486, z: 334.82388}
+    m_Scale: {x: 3.683361, y: 0.6014516, z: 1.0000024}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -10067,7 +10066,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.5373266
       mode: 0
       spread: 0
       speed:
@@ -10124,7 +10123,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 360
+      value: 359.82
       mode: 0
       spread: 0
       speed:
@@ -10186,7 +10185,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 20.73
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -10808,9 +10807,9 @@ ParticleSystem:
     enabled: 0
     x:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
-      minScalar: 0
+      minMaxState: 3
+      scalar: 10.89
+      minScalar: 3.84
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10861,9 +10860,9 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
-      minScalar: 0
+      minMaxState: 3
+      scalar: 17.46
+      minScalar: 10.92
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10914,9 +10913,9 @@ ParticleSystem:
         m_RotationOrder: 4
     z:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
-      minScalar: 0
+      minMaxState: 3
+      scalar: 27.43
+      minScalar: 18.27
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -11450,7 +11449,7 @@ ParticleSystem:
     enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -11503,9 +11502,9 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
-      minScalar: 0
+      minMaxState: 3
+      scalar: -50.09
+      minScalar: 26.8
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -11556,7 +11555,7 @@ ParticleSystem:
         m_RotationOrder: 4
     z:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 50
       minScalar: 0
       maxCurve:
@@ -15546,87 +15545,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971122252}
   m_CullTransparentMesh: 0
---- !u!1 &1984189871
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1984189872}
-  - component: {fileID: 1984189873}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1984189872
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984189871}
-  m_LocalRotation: {x: -0, y: -0, z: 0.13981947, w: 0.990177}
-  m_LocalPosition: {x: 0.712, y: 0.415, z: 4}
-  m_LocalScale: {x: 0.23560911, y: 0.23560911, z: 0.23560911}
-  m_Children: []
-  m_Father: {fileID: 1037598604}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 16.075}
---- !u!212 &1984189873
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984189871}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1104b77be106351419e29108ed61fd99, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 10.24, y: 10.24}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &1985919392
 GameObject:
   m_ObjectHideFlags: 0
@@ -16163,6 +16081,7 @@ MonoBehaviour:
   MainUi: {fileID: 358683431}
   Water: {fileID: 2088148275}
   ButtonNext: {fileID: 1971122252}
+  ButtonDone: {fileID: 23819869}
   waterSpray: {fileID: 338606535}
   HairParticle: {fileID: 1621730605}
   TextAnim: {fileID: 857168951}

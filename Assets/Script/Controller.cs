@@ -26,6 +26,7 @@ public class Controller : MonoBehaviour
     public GameObject MainUi;
     public GameObject Water;
     public GameObject ButtonNext;
+    public GameObject ButtonDone;
     public ParticleSystem waterSpray;
     public ParticleSystem HairParticle;
     public Animator TextAnim;
@@ -35,7 +36,7 @@ public class Controller : MonoBehaviour
     public static float zdistance;
     public static int trimCount = 0;
     public static int sortLayerCount = 4;
-
+    int fillcount = 0;
     public TextMeshProUGUI textInfo; 
     public GameObject textBackground; 
     public GameObject previewImage; 
@@ -77,11 +78,13 @@ public class Controller : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && !IsPointerOverUIObject())
             {
                 CreateFill();
+                fillcount++;
             }
 
             if (Input.GetMouseButton(0) && !IsPointerOverUIObject())
             {
 
+                TattoMachine.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1f));
                 Fill.transform.localScale = Fill.transform.localScale * 1.05f;
             }
         }
@@ -123,7 +126,7 @@ public class Controller : MonoBehaviour
 
 
 
-        TattoMachine.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1f));
+       
         Cloth.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, 20f, 1f));
         sprayBottle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(20f, -300f, 1f));
         Trimmer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f, -200f, 1.4f));
@@ -133,7 +136,12 @@ public class Controller : MonoBehaviour
             StartCoroutine(SpraySTart());
             trimCount++;
             TextAnim.SetTrigger("text");
+            trimCount = 0;
             
+        }
+        if(fillcount == 4)
+        {
+            ButtonDone.SetActive(true);
         }
     }
 
