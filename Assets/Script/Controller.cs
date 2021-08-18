@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using Tabtale.TTPlugins;
 
 public class Controller : MonoBehaviour
 {
@@ -45,7 +46,10 @@ public class Controller : MonoBehaviour
     Vector3 camPos;
 
     public ParticleSystem[] confetti;
-
+    private void Awake()
+    {
+        TTPCore.Setup();
+    }
     void Start()
     {
         camPos = camera.transform.position;
